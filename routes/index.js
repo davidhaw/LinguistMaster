@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/spanish', function (req, res, next) {
-  res.render('spanish', {title: 'Spanish'});
+  res.render('spanish', {title: 'Spanish'}, {layout: 'layoutWithJQUERY'});
 });
 
 module.exports = router;

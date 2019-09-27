@@ -2,7 +2,35 @@
 
     <h5>{{title}}</h5>
 
+    <br>
+
     <h5 class="instructions">Write the English translation to the Spanish Word Given:</h5>
-    <p class="wordGiven"></p>
+    <div id="app">
+        <br>
+        ${ Qword }
+        <br>
+        <br>
+        <input id="englishAnswer" v-model="englishAnswer">
+    </div>
 
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    var app = new Vue({
+        delimiters: ['${', '}'],
+        el: '#app',
+        data: {
+            Qword: 'Question',
+            englishAnswer: 'Your Translation'
+        },
+        mounted: function () {
+            this.loadMethod() //Executes on pageload, gets the first question word (Qword) ready for user
+        },
+        methods: {
+            loadMethod: function () {
+                this.Qword = "libra";
+            }
+        }
+    })
+</script>
