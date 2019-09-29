@@ -7,29 +7,155 @@
     <h5 class="instructions">Write the English translation to the Spanish Word Given:</h5>
     <div id="app">
         <br>
-        ${ Qword }
+        ${ questionShown }
         <br>
         <br>
-        <input id="englishAnswer" v-model="englishAnswer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">  <!-- TODO make the :( and :) below into an actual emoji -->
+                </div>
+                <div class="col-sm">
+                    <div class="card" style="width: 18rem;" id="answerCard">
+                        <div class="card-body">
+                            <input id="answerGiven" v-model="answerGiven">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm" id="leftCol">
+                    <div class="incorrect">
+                        Incorrect :(
+                        Correct Answer was: ${ correctAnswer }
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <button v-on:click="checkAnswer">Check Answer</button>
+                </div>
+                <div class="col-sm" id="rightCol">
+                    <div class="correct">
+                        Correct! :)
+                    </div>
+                </div>
+
+            </div>
     </div>
 
+    </div>
 </div>
 
+<script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/animejs@3.1.0/lib/anime.min.js"></script>
 <script>
+
+    //TODO create newQuestionSet that is called after question answer is checked
+    function newQuestionSet() {
+        $.get("/spanishSpanish/", function (data) {
+            //TODO production - delete the console log for production
+            console.log(data);
+            //Parse Data Given into seperate variables
+            let question = data['question'];
+            let answer = data['answer'];
+            app.questionShown = question;
+            app.correctAnswer = answer;
+        });
+    }
+
+    function randomIntFromInterval(min, max) { // min and max included
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+
+    var spanishLength;
+
     var app = new Vue({
         delimiters: ['${', '}'],
         el: '#app',
         data: {
-            Qword: 'Question',
-            englishAnswer: 'Your Translation'
+            questionShown: 'Question',
+            correctAnswer: '',
+            answerGiven: 'Your Translation'
         },
         mounted: function () {
             this.loadMethod() //Executes on pageload, gets the first question word (Qword) ready for user
         },
+
         methods: {
             loadMethod: function () {
-                this.Qword = "libra";
+                //The Load method function that is executed above on pageload
+                //TODO - Switch this to plain javascript and take out jQuery from the whole site
+                //Gets json from app.js spanishSpanish GET request for asking the user
+                $.get("/spanishSpanish/", function (data) {
+                    //TODO production - delete the console log for production
+                    console.log(data);
+                    //Parse Data Given into seperate variables
+                    let question = data['question'];
+                    let answer = data['answer'];
+                    app.questionShown = question;
+                    app.correctAnswer = answer;
+
+                    /* Reference for making correct and wrong visible and hidden TODO production-delete in production
+                    var leftCol = document.getElementById('leftCol');
+
+                    var rightCol = document.getElementById('rightCol');
+                    leftCol.style.visibility='hidden';
+                    rightCol.style.visibility='hidden';
+
+                     */
+                });
+            },
+            checkAnswer: function () {
+                if (app.correctAnswer === app.answerGiven) {
+                    rightCol.style.visibility = 'visible';
+                    anime({
+                        targets: '#answerCard',
+                        easing: 'linear',
+                        opacity: ['1', '0'],
+                        complete: function (anim) {
+                            console.log("completed");
+                            anime({
+                                targets: '#answerCard',
+                                easing: 'linear',
+                                opacity: ['0', '1'],
+                                complete: function (anim) {
+                                    newQuestionSet();
+                                    leftCol.style.visibility = 'hidden';
+                                    rightCol.style.visibility = 'hidden';
+                                }
+                            });
+                        }
+                    });
+                } else {
+                    //TODO add animejs animation (also for correct answer)
+                    leftCol.style.visibility = 'visible';
+                    anime({
+                        targets: '#answerCard',
+                        easing: 'linear',
+                        opacity: ['1', '0'],
+                        complete: function (anim) {
+                            console.log("completed");
+                            anime({
+                                targets: '#answerCard',
+                                easing: 'linear',
+                                opacity: ['0', '1'],
+                                complete: function (anim) {
+                                    newQuestionSet();
+                                    leftCol.style.visibility = 'hidden';
+                                    rightCol.style.visibility = 'hidden';
+                                }
+                            });
+                        }
+                    });
+
+
+                }
+
             }
         }
     })

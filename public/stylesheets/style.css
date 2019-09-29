@@ -27,3 +27,21 @@ a:active {
   text-align: center;
 
 }
+
+#leftCol {
+  visibility: hidden;
+}
+
+#rightCol {
+  visibility: hidden;
+}
+
+/* Inccorect on the Questions Page */
+.incorrect {
+  color: red;
+}
+
+/* Correct on the Questions Page */
+.correct {
+  color: green;
+}
