@@ -39,11 +39,13 @@ a:active {
 
 /* Inccorect on the Questions Page */
 .incorrect {
+  font-size: 2em;
   color: red;
 }
 
 /* Correct on the Questions Page */
 .correct {
+  font-size: 2em;
   color: green;
 }
 

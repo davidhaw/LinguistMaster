@@ -8,7 +8,7 @@ let spanishSpanish = [];
 let spanishEnglish = [];
 
 // TODO remove verbose (for long stack traces) when production ready
-const sqlite3 = require('sqlite3').verbose();
+const sqlite3 = require('sqlite3');
 let db = new sqlite3.Database('./db/spanish.sqlite3', (err) => {
     if (err) {
         console.error(err.message);

@@ -2,7 +2,7 @@
     <h5>{{title}}</h5>
 
     <br>
-
+    <!--TODO Make This page's text, buttons, and text fields loke like they're modern and not from the 90s-->
     <h5 class="instructions">Write the English translation to the Spanish Word Given:</h5>
     <div id="app">
         <br>
@@ -11,7 +11,7 @@
         <br>
         <div class="container">
             <div class="row">
-                <div class="col-sm">  <!-- TODO make the :( and :) below into an actual emoji -->
+                <div class="col-sm">
                 </div>
                 <div class="col-sm">
                     <div class="card" style="width: 18rem;" id="answerCard">
@@ -27,7 +27,7 @@
             <div class="row">
                 <div class="col-sm" id="leftCol">
                     <div class="incorrect">
-                        Incorrect :(
+                        Incorrect 😞
                         Correct Answer was: ${ correctAnswer }
                     </div>
                 </div>
@@ -36,7 +36,7 @@
                 </div>
                 <div class="col-sm" id="rightCol">
                     <div class="correct">
-                        Correct! :)
+                        Correct! 😃
                     </div>
                 </div>
 
@@ -54,11 +54,8 @@
 <script src="https://cdn.jsdelivr.net/npm/animejs@3.1.0/lib/anime.min.js"></script>
 <script>
 
-    //TODO create newQuestionSet that is called after question answer is checked
     function newQuestionSet() {
         $.get("/spanishSpanish/", function (data) {
-            //TODO production - delete the console log for production
-            console.log(data);
             //Parse Data Given into seperate variables
             let question = data['question'];
             let answer = data['answer'];
@@ -91,8 +88,6 @@
                 //TODO - Switch this to plain javascript and take out jQuery from the whole site
                 //Gets json from app.js spanishSpanish GET request for asking the user
                 $.get("/spanishSpanish/", function (data) {
-                    //TODO production - delete the console log for production
-                    console.log(data);
                     //Parse Data Given into seperate variables
                     let question = data['question'];
                     let answer = data['answer'];
@@ -131,7 +126,6 @@
                         }
                     });
                 } else {
-                    //TODO add animejs animation (also for correct answer)
                     leftCol.style.visibility = 'visible';
                     anime({
                         targets: '#answerCard',
@@ -151,10 +145,7 @@
                             });
                         }
                     });
-
-
                 }
-
             }
         }
     })
