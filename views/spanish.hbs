@@ -56,16 +56,15 @@
 
     function newQuestionSet() {
         $.get("/spanishSpanish/", function (data) {
+            //TODO - Switch this to plain javascript and take out jQuery from the whole site
+            //Gets json from app.js spanishSpanish GET request for asking the user
             //Parse Data Given into seperate variables
             let question = data['question'];
             let answer = data['answer'];
+            
             app.questionShown = question;
             app.correctAnswer = answer;
         });
-    }
-
-    function randomIntFromInterval(min, max) { // min and max included
-        return Math.floor(Math.random() * (max - min + 1) + min);
     }
 
     var spanishLength;
@@ -79,33 +78,11 @@
             answerGiven: 'Your Translation'
         },
         mounted: function () {
-            this.loadMethod() //Executes on pageload, gets the first question word (Qword) ready for user
+            newQuestionSet(); //Executes on pageload, gets the first question word (Qword) ready for user
         },
-
         methods: {
-            loadMethod: function () {
-                //The Load method function that is executed above on pageload
-                //TODO - Switch this to plain javascript and take out jQuery from the whole site
-                //Gets json from app.js spanishSpanish GET request for asking the user
-                $.get("/spanishSpanish/", function (data) {
-                    //Parse Data Given into seperate variables
-                    let question = data['question'];
-                    let answer = data['answer'];
-                    app.questionShown = question;
-                    app.correctAnswer = answer;
-
-                    /* Reference for making correct and wrong visible and hidden TODO production-delete in production
-                    var leftCol = document.getElementById('leftCol');
-
-                    var rightCol = document.getElementById('rightCol');
-                    leftCol.style.visibility='hidden';
-                    rightCol.style.visibility='hidden';
-
-                     */
-                });
-            },
             checkAnswer: function () {
-                if (app.correctAnswer === app.answerGiven) {
+                if (app.correctAnswer.toLowerCase() === app.answerGiven.toLowerCase()) {
                     rightCol.style.visibility = 'visible';
                     anime({
                         targets: '#answerCard',
