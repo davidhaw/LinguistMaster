@@ -1,6 +1,7 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    margin: 0;
 }
 
 a:link {
@@ -45,3 +46,38 @@ a:active {
 .correct {
   color: green;
 }
+
+/* Custom Navbar */
+ul.topnav {
+    font-size: 18px;
+    float: none;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+    background-color: #b2bec3;
+}
+
+ul.topnav li {
+    display: inline-block;
+    float: none;
+}
+
+ul.topnav li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+ul.topnav li a:hover {
+    background-color: #dfe6e9;
+}
+
+@media screen and (max-width: 600px) {
+    ul.topnav li.right,
+    ul.topnav li {
+        float: none;
+    }
+}
+

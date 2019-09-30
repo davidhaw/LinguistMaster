@@ -3,15 +3,24 @@
   <head>
     <title>{{title}}</title>
       <meta content="Quizzing Your Foreign Language Vocabulary" name="Linguist Master">
-      <meta content="width=device-width, initial-scale=1" name="viewport">
-
-      <link rel='stylesheet' href='/stylesheets/style.css'/>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <!-- TODO Eventually remove the use of bootstrap (currently only using it for the language select cards and the Answer card)-->
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
             integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <link rel='stylesheet' href='/stylesheets/style.css'/>
+
   </head>
   <body>
+
+  <ul class="topnav">
+      <li><a href="index" class="navChild">Home</a></li>
+      <li><a href="https://www.github.com/davidhaw/linguistmaster" class="navChild">Github</a></li>
+  </ul>
+  <br>
     {{{body}}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
             integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
             crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
