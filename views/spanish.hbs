@@ -78,6 +78,8 @@
             answerGiven: 'Your Translation'
         },
         mounted: function () {
+            leftCol.style.visibility = 'hidden';
+            rightCol.style.visibility = 'hidden';
             newQuestionSet(); //Executes on pageload, gets the first question word (Qword) ready for user
         },
         methods: {

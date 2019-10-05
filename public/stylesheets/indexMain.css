@@ -1,0 +1,87 @@
+body {
+    background: #FFF9F9;
+    font-family: 'Roboto', sans-serif;
+
+}
+
+.banner {
+    text-align: center;
+}
+
+ul.topnav li {
+    display: inline-block;
+    float: none;
+    
+}
+
+ul.topnav li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+ul.topnav li a:hover {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+}
+
+@media screen and (max-width: 600px) {
+    ul.topnav li.right,
+    ul.topnav li {
+        float: none;
+    }
+}
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 40%;
+    border-radius: 5px; /* 5px rounded corners */
+}
+  
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+  
+.container {
+    padding: 2px 16px;
+}
+
+.card-img-top {
+    border-radius: 5px 5px 0 0; /* 5px rounded corners for card image */
+}
+
+a:link {
+    text-decoration: none;
+    color: black;
+}
+  
+a:visited {
+    text-decoration: none;
+    color: black;
+}
+  
+a:hover {
+    text-decoration: none;
+    color: black;
+}
+  
+a:active {
+    text-decoration: none;
+    color: black;
+}
+
+.footer {
+    text-align: center;
+    color: black;
+}
+.footer a:link{
+    color:blue;
+}
+.center {
+
+    text-align: center;
+  
+  }
