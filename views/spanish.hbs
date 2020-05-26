@@ -2,7 +2,7 @@
     <h5>{{title}}</h5>
 
     <br>
-    <!--TODO Make This page's text, buttons, and text fields loke like they're modern and not from the 90s-->
+    <!--TODO Make This page's text, buttons, and text fields look like they're modern and not from the 90s-->
     <h5 class="instructions">Write the English translation to the Spanish Word Given:</h5>
     <div id="app">
         <br>
@@ -24,6 +24,8 @@
                 </div>
             </div>
             <br>
+            <button class="CheckButton" v-on:click="checkAnswer">Check Answer</button>
+            <br>
             <div class="row">
                 <div class="col-sm" id="leftCol">
                     <div class="incorrect">
@@ -32,7 +34,6 @@
                     </div>
                 </div>
                 <div class="col-sm">
-                    <button v-on:click="checkAnswer">Check Answer</button>
                 </div>
                 <div class="col-sm" id="rightCol">
                     <div class="correct">
@@ -46,25 +47,24 @@
     </div>
 </div>
 
-<script
-        src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-        crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/animejs@3.1.0/lib/anime.min.js"></script>
 <script>
 
     function newQuestionSet() {
-        $.get("/spanishSpanish/", function (data) {
-            //TODO - Switch this to plain javascript and take out jQuery from the whole site
-            //Gets json from app.js spanishSpanish GET request for asking the user
-            //Parse Data Given into seperate variables
-            let question = data['question'];
-            let answer = data['answer'];
-            
-            app.questionShown = question;
-            app.correctAnswer = answer;
-        });
+    //TODO Make sure it doesn't give the same question multiple times in a row
+    //Gets json from app.js spanishSpanish GET request for asking the user
+    //Parse Data Given into seperate variables
+    fetch('/spanishSpanish/')
+      .then(response => response.json())
+      .then(data => {
+        let question = data['question'];
+        let answer = data['answer'];
+        app.questionShown = question;
+        app.correctAnswer = answer;
+      }).catch(error => {
+        console.log("Error in getting Question");
+      });
     }
 
     var spanishLength;
@@ -83,10 +83,24 @@
             newQuestionSet(); //Executes on pageload, gets the first question word (Qword) ready for user
         },
         methods: {
+        // TODO: Make it remove the correct or wrong after going to next question
             checkAnswer: function () {
                 if (app.correctAnswer.toLowerCase() === app.answerGiven.toLowerCase()) {
                     rightCol.style.visibility = 'visible';
-                    anime({
+                    async function newQuestionWait() {
+
+                      let promise = new Promise((resolve, reject) => {
+                        setTimeout(() => resolve("done!"), 1000)
+                      });
+
+                      let result = await promise; // Wait so user can see if they're right or not TODO: make it where someone can always
+
+                       newQuestionSet();
+                    }
+
+                    newQuestionWait();
+
+                /*    anime({       TODO: Fix it, it doesn't work when mouse is hovering on it and it looks bad | Make it like an animated checkmark or something
                         targets: '#answerCard',
                         easing: 'linear',
                         opacity: ['1', '0'],
@@ -103,10 +117,10 @@
                                 }
                             });
                         }
-                    });
+                    }); */
                 } else {
                     leftCol.style.visibility = 'visible';
-                    anime({
+                 /*   anime({  TODO: Same as I said above
                         targets: '#answerCard',
                         easing: 'linear',
                         opacity: ['1', '0'],
@@ -123,7 +137,7 @@
                                 }
                             });
                         }
-                    });
+                    }); */
                 }
             }
         }
